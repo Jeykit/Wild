@@ -7,3 +7,11 @@
 //
 
 import Foundation
+
+import UIKit
+
+
+@objc protocol MULabelTextByClickDelegate : NSObjectProtocol {
+    
+    func labelTextByClick(rowHeight : CGFloat, indexPath : NSIndexPath)
+}

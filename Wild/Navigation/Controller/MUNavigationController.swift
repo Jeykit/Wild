@@ -14,6 +14,8 @@ class MUNavigationController: UINavigationController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.edgesForExtendedLayout = UIRectEdge.None
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,6 +23,19 @@ class MUNavigationController: UINavigationController {
         // Dispose of any resources that can be recreated.
     }
     
+    //This is a class method,it will be used only once when the controller was init.
+    override class func initialize(){
+    
+        UINavigationBar.appearance().setBackgroundImage(UIImage(named: "navigation-background"), forBarMetrics: UIBarMetrics.Default)
+       // self.addChildViewController(UINavigationController(rootViewController: ViewController()) as! MUNavigationController)
+         //let Controller = ViewController()
+        //MUNavigationController(rootViewController: Controller)
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        
+       return UIStatusBarStyle.LightContent
+    }
 
     /*
     // MARK: - Navigation

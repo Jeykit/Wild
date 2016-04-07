@@ -8,6 +8,8 @@
 
 import UIKit
 
-class MUImageByTapDelegate: NSObjectProtocol {
+@objc protocol MUImageByTapDelegate: NSObjectProtocol {
 
+    //get information of image what was tap
+    func getImageInfoByTap(flag flag:Int)
 }

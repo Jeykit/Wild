@@ -17,5 +17,30 @@ class MUButton: UIButton {
         // Drawing code
     }
     */
+    override func titleRectForContentRect(contentRect: CGRect) -> CGRect {
+        
+        
+        //self.titleLabel?.center.x = self.center.x
+        //return (self.imageView?.frame)!
+        let rect = CGRectMake(0, 0, contentRect.size.width, contentRect.size.height)
+        return rect
+    }
+    
+    override func imageRectForContentRect(contentRect: CGRect) -> CGRect {
+        
+        let rect = CGRectMake(0, 0, contentRect.size.width, contentRect.size.height)
+        return rect
 
+    }
+
+//    override func layoutSubviews() {
+//        
+////        self.label.frame = (self.imageView?.frame)!
+////        let Hstr = "|-0-[imgV]-0-|"
+////        let Hcons = NSLayoutConstraint.constraintsWithVisualFormat(Hstr, options: .AlignAllLeft, metrics: nil, views: ["imgV" : self.imgeV])
+////        self.addConstraints(Hcons)
+//        
+//        self.bringSubviewToFront(self.titleLabel!)
+//        //self.titleRectForContentRect(self.frame)
+//    }
 }

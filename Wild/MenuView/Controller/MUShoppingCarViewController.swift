@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MUShoppingCarViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,MUShoppingCarViewCellDelegate,UIPickerViewDataSource,UIPickerViewDelegate{
+class MUShoppingCarViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,MUShoppingCarViewCellDelegate,UIPickerViewDataSource,UIPickerViewDelegate,UIPopoverPresentationControllerDelegate,UIPopoverControllerDelegate{
 
     //var array:NSMutableArray?
     
@@ -32,6 +32,10 @@ class MUShoppingCarViewController: UIViewController,UITableViewDataSource,UITabl
     
     private var subTotalLabelPrice:UILabel?
     
+    private var navigationView:UIView?
+    
+    private var numberDicitonary:NSMutableDictionary = NSMutableDictionary()
+    
     private var tempCount:Int = 0
     
     private var tFlag:Int = 0
@@ -53,7 +57,7 @@ class MUShoppingCarViewController: UIViewController,UITableViewDataSource,UITabl
         
         self.navigationController?.navigationBar.titleTextAttributes = [NSFontAttributeName : UIFont.systemFontOfSize(18.0),NSForegroundColorAttributeName : UIColor.whiteColor()]
         
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = UIColor.customWhite()
         
        // self.payForView.backgroundColor = UIColor.purpleColor()
         
@@ -68,6 +72,7 @@ class MUShoppingCarViewController: UIViewController,UITableViewDataSource,UITabl
         if modalArray?.count == 0 {
             
            self.customViewForModalArrayEmpty()
+            
         }else {
             
             self.customViews()
@@ -79,9 +84,19 @@ class MUShoppingCarViewController: UIViewController,UITableViewDataSource,UITabl
     
     override func viewWillAppear(animated: Bool) {
         
-        //self.numberOfCount = 0
+        self.navigationItem.hidesBackButton = true
         
-        //self.totalPrice = 0
+        self.modalArray = MUSQLiteDatabaseShoppingCarTool.readDataFromDatabase()
+        
+        self.numberOfCount = "\(MUSQLiteDatabaseShoppingCarTool.numberOfCount)"
+        
+        self.totalPrice = "\(MUSQLiteDatabaseShoppingCarTool.totalPrice)"
+        
+        self.codeArray = MUSQLiteDatabaseShoppingCarTool.codeArray
+        
+        self.codeDictionary = MUSQLiteDatabaseShoppingCarTool.codeDict
+        
+        self.customBackItem()
     }
    
     override func viewWillDisappear(animated: Bool) {
@@ -94,10 +109,44 @@ class MUShoppingCarViewController: UIViewController,UITableViewDataSource,UITabl
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-//    func backToLastViewControner(barButton : UIBarButtonItem) {
-//        
-//        self.navigationController?.popViewControllerAnimated(true)
-//    }
+    private func customBackItem() {
+        
+        self.navigationView = UIView(frame: (self.navigationController?.navigationBar.bounds)!)
+        
+        let lButton:UIButton = UIButton()
+        
+        lButton.addTarget(self, action: #selector(MUShoppingCarViewController.handlerBackItem(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        
+        lButton.setImage(UIImage(named:"back")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal), forState: UIControlState.Normal)
+        
+        lButton.setImage(UIImage(named:"back")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal), forState: UIControlState.Highlighted)
+        
+        lButton.setBackgroundImage(UIImage(named:"menu_highlight")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal), forState: UIControlState.Highlighted)
+        
+        lButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        navigationView!.addSubview(lButton)
+        
+        let backButtonConstraint_spaceOfLeft = NSLayoutConstraint(item: lButton, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: navigationView, attribute: NSLayoutAttribute.Left, multiplier:1.0, constant: 12)
+        
+        let backButtonConstraint_center = NSLayoutConstraint(item: lButton, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: navigationView, attribute: NSLayoutAttribute.CenterY, multiplier: 1.0, constant: 0)
+        
+        let hbackButtonConstraint_center = NSLayoutConstraint(item: lButton, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: navigationView, attribute: NSLayoutAttribute.Width, multiplier: 0, constant: 30.0)
+        
+        
+        navigationView!.addConstraints([backButtonConstraint_spaceOfLeft,backButtonConstraint_center,hbackButtonConstraint_center])
+        
+        self.navigationController?.navigationBar.addSubview(navigationView!)
+        
+    }
+    
+    func handlerBackItem(button : UIButton) {
+        
+        self.navigationView?.removeFromSuperview()
+        
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+
    private func customViewForModalArrayEmpty() {
         
         
@@ -125,7 +174,7 @@ class MUShoppingCarViewController: UIViewController,UITableViewDataSource,UITabl
         
         button.translatesAutoresizingMaskIntoConstraints = false
         
-        button.addTarget(self, action: "goToContentViewController:", forControlEvents: UIControlEvents.TouchUpInside)
+        button.addTarget(self, action: #selector(MUShoppingCarViewController.goToContentViewController(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         
         self.view.addSubview(button)
         
@@ -155,6 +204,7 @@ class MUShoppingCarViewController: UIViewController,UITableViewDataSource,UITabl
     
     func goToContentViewController (button : UIButton) {
         
+        self.navigationView?.removeFromSuperview()
         
         self.navigationController?.popToRootViewControllerAnimated(true)
     }
@@ -162,54 +212,54 @@ class MUShoppingCarViewController: UIViewController,UITableViewDataSource,UITabl
   private func customViews(){
         
         self.tableView.registerClass(MUShoppingCarViewCell.self, forCellReuseIdentifier: "cell")
-        
-        self.tableView.translatesAutoresizingMaskIntoConstraints = false
-        
-        self.tableView.estimatedRowHeight = 92.0
-        
-        self.tableView.rowHeight = UITableViewAutomaticDimension
-        
-        self.tableView.dataSource = self
-        
-        self.tableView.delegate = self
-    
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
-        
+
+       self.tableView.translatesAutoresizingMaskIntoConstraints  = false
+
+       self.tableView.estimatedRowHeight                         = 92.0
+
+       self.tableView.rowHeight                                  = UITableViewAutomaticDimension
+
+       self.tableView.dataSource                                 = self
+
+       self.tableView.delegate                                   = self
+
+       self.tableView.separatorStyle                             = UITableViewCellSeparatorStyle.None
+
         self.view.addSubview(self.tableView)
-        
-        self.payForView.translatesAutoresizingMaskIntoConstraints = false
-        
+
+       self.payForView.translatesAutoresizingMaskIntoConstraints = false
+
         self.view.addSubview(self.payForView)
-        
-       
-        
-        let vTableViewConstraint = NSLayoutConstraint(item: self.tableView, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.Top, multiplier: 1.0, constant: 12.0)
-        
+
+
+
+       let vTableViewConstraint                                  = NSLayoutConstraint(item: self.tableView, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.Top, multiplier: 1.0, constant: 12.0)
+
         self.view.addConstraint(vTableViewConstraint)
-        
-        let hTableViewConstraintLeft = NSLayoutConstraint(item: self.tableView, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 12.0)
-        
+
+       let hTableViewConstraintLeft                              = NSLayoutConstraint(item: self.tableView, attribute: NSLayoutAttribute.Left, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.Left, multiplier: 1.0, constant: 12.0)
+
         self.view.addConstraint(hTableViewConstraintLeft)
-        
-        let hTableViewConstraintRight = NSLayoutConstraint(item: self.tableView, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -12.0)
-        
+
+       let hTableViewConstraintRight                             = NSLayoutConstraint(item: self.tableView, attribute: NSLayoutAttribute.Right, relatedBy: NSLayoutRelation.Equal, toItem: self.view, attribute: NSLayoutAttribute.Right, multiplier: 1.0, constant: -12.0)
+
         self.view.addConstraint(hTableViewConstraintRight)
-        
-        let botttom = NSLayoutConstraint(item: self.tableView, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self.payForView, attribute: NSLayoutAttribute.Top, multiplier: 1.0, constant: -12.0)
-        
+
+       let botttom                                               = NSLayoutConstraint(item: self.tableView, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self.payForView, attribute: NSLayoutAttribute.Top, multiplier: 1.0, constant: -12.0)
+
         self.view.addConstraint(botttom)
-        
+
         //add constraint to payforView
-       let hPayForViewConstraintVFL = "H:|-0-[payForView]-0-|"
-        
-        let hPayForViewConstraint = NSLayoutConstraint.constraintsWithVisualFormat(hPayForViewConstraintVFL, options: NSLayoutFormatOptions.AlignAllBottom, metrics: nil, views: ["payForView" : payForView])
-        
+       let hPayForViewConstraintVFL                              = "H:|-0-[payForView]-0-|"
+
+       let hPayForViewConstraint                                 = NSLayoutConstraint.constraintsWithVisualFormat(hPayForViewConstraintVFL, options: NSLayoutFormatOptions.AlignAllBottom, metrics: nil, views: ["payForView" : payForView])
+
         self.view.addConstraints(hPayForViewConstraint)
-        
-        let vPayForViewConstraintVFL = "V:[payForView(==192)]-12-|"
-        
-        let vPayForViewConstraint = NSLayoutConstraint.constraintsWithVisualFormat(vPayForViewConstraintVFL, options: NSLayoutFormatOptions.AlignAllBottom, metrics: nil, views: ["payForView" : payForView])
-        
+
+       let vPayForViewConstraintVFL                              = "V:[payForView(==192)]-12-|"
+
+       let vPayForViewConstraint                                 = NSLayoutConstraint.constraintsWithVisualFormat(vPayForViewConstraintVFL, options: NSLayoutFormatOptions.AlignAllBottom, metrics: nil, views: ["payForView" : payForView])
+
         self.view.addConstraints(vPayForViewConstraint)
 
          self.customPayView()
@@ -238,7 +288,11 @@ class MUShoppingCarViewController: UIViewController,UITableViewDataSource,UITabl
         
         let reallyModalArray = self.modalArray![indexPath.section] as! NSMutableArray
      
-        //cell.modal = reallyModalArray[indexPath.row] as? MUShoppingCarModal
+        cell.modal = reallyModalArray[indexPath.row] as? MUShoppingCarModal
+        
+        let initNumber:Int = 1
+        
+        self.numberDicitonary.setValue(initNumber, forKey: (cell.modal?.imageName)!)
         
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         
@@ -255,7 +309,7 @@ class MUShoppingCarViewController: UIViewController,UITableViewDataSource,UITabl
         
         let view = UIView(frame: CGRectMake(0,0,self.view.frame.size.width,12.0))
         
-        view.backgroundColor = UIColor.blueColor()
+        view.backgroundColor = UIColor.customWhite()
         
         return view
 
@@ -272,27 +326,18 @@ class MUShoppingCarViewController: UIViewController,UITableViewDataSource,UITabl
             return 136.0
         }else{
             
-            return 92.0
+            return 104.0
         }
     }
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
-        return 92.0
+        return 104.0
     }
     
-  private func customPayView(){
+   private func customPayView(){
         
         let payInfoView = UIView()
-        
-//        button.setImage(UIImage(named: "shoppingCar_bag_defalut_22"), forState: UIControlState.Normal)
-//        
-//        button.setTitle("USED COUPONS", forState: UIControlState.Normal)
-//        
-//        button.titleLabel?.font = UIFont.systemFontOfSize(18.0)
-        
-        
-        //payInfoView.backgroundColor = UIColor.grayColor()
         
         payInfoView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -301,6 +346,8 @@ class MUShoppingCarViewController: UIViewController,UITableViewDataSource,UITabl
         let payView = UIView()
         
         payView.translatesAutoresizingMaskIntoConstraints = false
+    
+        payView.backgroundColor = UIColor.customWhite()
         
         self.payForView.addSubview(payView)
         
@@ -333,7 +380,7 @@ class MUShoppingCarViewController: UIViewController,UITableViewDataSource,UITabl
    private func customPayInfoView(payInfoView:UIView){
     
     
-       payInfoView.backgroundColor = UIColor.lightGrayColor()
+       payInfoView.backgroundColor = UIColor.customGrayColor()
     
        let label = UILabel()
         
@@ -341,7 +388,7 @@ class MUShoppingCarViewController: UIViewController,UITableViewDataSource,UITabl
         
         label.text = "Promo Code"
     
-        label.textColor = UIColor.whiteColor()
+        label.textColor = UIColor.lightGrayColor()
         
         label.font = UIFont.systemFontOfSize(12.0)
     
@@ -399,21 +446,21 @@ class MUShoppingCarViewController: UIViewController,UITableViewDataSource,UITabl
     
         //let textOfNumber = "\(self.numberOfCount)"
     
-//        let text = "Total " + self.numberOfCount! + " Commodity  Total Price"
-//    
-//        let nsText = text as NSString
-//    
-//        let range = nsText.rangeOfString(self.numberOfCount!, options: NSStringCompareOptions.CaseInsensitiveSearch)
-//    
-//        //print("===========\(range)========\(nsText.length)",self.numberOfCount)
-//    
-//        self.customLabelInPayInfoView(subTotalLabel, textString: text)
-//    
-//        let attributeString = NSMutableAttributedString(string: subTotalLabel.text!)
-//    
-//        attributeString.addAttributes([NSForegroundColorAttributeName : UIColor(hue: 343.0, saturation: 87.0, brightness: 99.0, alpha: 1.0)], range: range)
-//    
-//        subTotalLabel.attributedText = attributeString
+        let text = "Total " + self.numberOfCount! + " Commodity  Total Price"
+    
+        let nsText = text as NSString
+    
+        let range = nsText.rangeOfString(self.numberOfCount!, options: NSStringCompareOptions.CaseInsensitiveSearch)
+    
+        //print("===========\(range)========\(nsText.length)",self.numberOfCount)
+    
+        self.customLabelInPayInfoView(subTotalLabel, textString: text)
+    
+        let attributeString = NSMutableAttributedString(string: subTotalLabel.text!)
+    
+        attributeString.addAttributes([NSForegroundColorAttributeName : UIColor.customColor()], range: range)
+    
+        subTotalLabel.attributedText = attributeString
     
         payInfoView.addSubview(subTotalLabel)
     
@@ -452,7 +499,7 @@ class MUShoppingCarViewController: UIViewController,UITableViewDataSource,UITabl
     
         totalPriceLabel.font = UIFont.systemFontOfSize(18.0)
     
-        totalPriceLabel.textColor = UIColor(hue: 343.0, saturation: 87.0, brightness: 99.0, alpha: 1.0)
+        totalPriceLabel.textColor = UIColor.customColor()
     
         self.tempLabel = totalPriceLabel
     
@@ -465,7 +512,7 @@ class MUShoppingCarViewController: UIViewController,UITableViewDataSource,UITabl
     
        codeLabel.translatesAutoresizingMaskIntoConstraints = false
     
-       codeLabel.textColor = UIColor(hue: 343.0, saturation:87.0, brightness: 99.0, alpha: 0.75)
+       codeLabel.textColor = UIColor.customColor()
     
        codeLabel.font = UIFont.systemFontOfSize(12.0)
     
@@ -475,7 +522,7 @@ class MUShoppingCarViewController: UIViewController,UITableViewDataSource,UITabl
     
        codeLabelPrice.text = "$\(codePrice)"
     
-       codeLabelPrice.textColor = UIColor(hue: 343.0, saturation: 87.0, brightness: 99.0, alpha: 1.0)
+       codeLabelPrice.textColor = UIColor.customColor()
     
        codeLabelPrice.font = UIFont.systemFontOfSize(12.0)
     
@@ -514,7 +561,7 @@ class MUShoppingCarViewController: UIViewController,UITableViewDataSource,UITabl
     
     }
     
-    private func subTotalLabel(label : UILabel,textString : String) {
+   private func subTotalLabel(label : UILabel,textString : String) {
         
         let text = "Total " + textString + " Commodity  Total Price"
         
@@ -534,7 +581,7 @@ class MUShoppingCarViewController: UIViewController,UITableViewDataSource,UITabl
 
     }
     
-    private func customLabelInPayInfoView(label : UILabel,textString : String) {
+   private func customLabelInPayInfoView(label : UILabel,textString : String) {
         
         label.text = textString
         
@@ -542,7 +589,7 @@ class MUShoppingCarViewController: UIViewController,UITableViewDataSource,UITabl
         
         label.translatesAutoresizingMaskIntoConstraints = false
         
-        label.textColor = UIColor.whiteColor()
+        label.textColor = UIColor.lightGrayColor()
 
     }
     
@@ -550,6 +597,7 @@ class MUShoppingCarViewController: UIViewController,UITableViewDataSource,UITabl
         
         return 1
     }
+    
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         
         return (self.codeArray?.count)!
@@ -615,7 +663,7 @@ class MUShoppingCarViewController: UIViewController,UITableViewDataSource,UITabl
         
         let button = MUButton()
         
-        button.setImage(UIImage(named: "shoppongCar_Payfor_bg_44"), forState: UIControlState.Normal)
+        button.setImage(UIImage(named: "shopping-car-button"), forState: UIControlState.Normal)
         
         button.setTitle("Buy now", forState: UIControlState.Normal)
         
@@ -625,7 +673,7 @@ class MUShoppingCarViewController: UIViewController,UITableViewDataSource,UITabl
         
         button.translatesAutoresizingMaskIntoConstraints = false
     
-        button.addTarget(self, action: "BuyNowButtonByClicked:", forControlEvents: UIControlEvents.TouchUpInside)
+        button.addTarget(self, action: #selector(MUShoppingCarViewController.BuyNowButtonByClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         
         cView.addSubview(button)
         
@@ -671,6 +719,8 @@ class MUShoppingCarViewController: UIViewController,UITableViewDataSource,UITabl
         
         self.codeArray?.removeObjectAtIndex(flag)
         
+        MUButtonBdageTool.setDecrementsButtonBadgeValues(1)
+        
         //print("==================\(flag)")
         
         //self.tableView.deleteSections(NSIndexSet(index: indexPath.section), withRowAnimation: UITableViewRowAnimation.Right)
@@ -684,11 +734,15 @@ class MUShoppingCarViewController: UIViewController,UITableViewDataSource,UITabl
         
         self.totalPrice = "\(MUSQLiteDatabaseShoppingCarTool.totalPrice)"
         
-        let codePrice = self.codeDictionary?.valueForKey(self.codeArray![0] as! String) as! Float
-        
-        let tTotalPrice = (self.totalPrice! as NSString).floatValue - codePrice
-        
-        self.tempLabel.text = "$" + "\(tTotalPrice)"
+        if self.codeArray?.count > 0 {
+            
+            let codePrice = self.codeDictionary?.valueForKey(self.codeArray![0] as! String) as! Float
+            
+            let tTotalPrice = (self.totalPrice! as NSString).floatValue - codePrice
+            
+            self.tempLabel.text = "$" + "\(tTotalPrice)"
+
+        }
         
         self.subTotalLabel(self.tempSubTotalLabel!, textString: self.numberOfCount!)
         
@@ -696,22 +750,38 @@ class MUShoppingCarViewController: UIViewController,UITableViewDataSource,UITabl
         
         self.tFlag = 0
         
-        self.tableView.reloadData()
+        if self.modalArray?.count == 0 {
+            
+            self.customViewForModalArrayEmpty()
+            
+            self.payForView.removeFromSuperview()
+            
+            self.tableView.removeFromSuperview()
+            
+        }else{
+            
+             self.pickerView?.reloadAllComponents()
+             self.tableView.reloadData()
+        }
+           // print("====================\(self.modalArray?.count)")
         
-        self.pickerView?.reloadAllComponents()
+            
+        
+        
 
         
     }
     
-    func updatePayForViewData(number: Int, price: Float) {
+    func updatePayForViewData(imageName: String, number: Int, price: Float) {
         
-        if number > 1 {
+       // print("=============\(number)")
+        if number >= 1 {
             
-            var totalNumber = (self.numberOfCount! as NSString).integerValue
+            //var totalNumber = (self.numberOfCount! as NSString).integerValue
             
-            totalNumber = totalNumber + number - 1
+           // totalNumber = totalNumber + number - 1
             
-            self.numberOfCount = "\(totalNumber)"
+            self.numberOfCount = "\(number)"
             
             self.subTotalLabel(self.tempSubTotalLabel!, textString: self.numberOfCount!)
             
@@ -719,7 +789,9 @@ class MUShoppingCarViewController: UIViewController,UITableViewDataSource,UITabl
             
             let codePriceString = codePriceText.substringWithRange(NSMakeRange(1, codePriceText.length - 1)) as NSString
             
-            let subTotalPrice = Float(number - 1) * price + (self.totalPrice! as NSString).floatValue
+            //let subTotalPrice = Float(number - 1) * price + (self.totalPrice! as NSString).floatValue
+            
+            let subTotalPrice = Float(number) * price
             
             self.totalPrice = "\(subTotalPrice - codePriceString.floatValue)"
             
@@ -728,6 +800,9 @@ class MUShoppingCarViewController: UIViewController,UITableViewDataSource,UITabl
             self.subTotalLabelPrice?.text = "$" + "\(subTotalPrice)"
             
         }
+        
+        self.numberDicitonary.setValue(number, forKey: imageName)
+
     }
     
     func BuyNowButtonByClicked(button : UIButton) {
@@ -735,9 +810,96 @@ class MUShoppingCarViewController: UIViewController,UITableViewDataSource,UITabl
         //add goodsData
         //imageName,price,title,size,color,date,cod
         
-        let tempOrderData = NSMutableArray()
+        if (NSUserDefaults.standardUserDefaults().objectForKey("email") != nil) {
+            
+            let email = NSUserDefaults.standardUserDefaults().objectForKey("email") as! String
+            
+            MUSQLiteAddressTool.createDataBase()
+            
+            let addressModal = MUSQLiteAddressTool.querryDefalutAddressInDatabase(email)
+            
+            if (addressModal.date != nil) {
+                
+               let tempArray = self.addDataToDatabase()
+                
+                tempArray.addObject(addressModal.date!)
+                
+                MUSQLiteDataMeViewControllerTool.writeOrderDataToDatabase(tempArray)
+                
+                MUSQLiteDatabaseShoppingCarTool.deletedDatabase()
+                
+                MUButtonBdageTool.initButtonBadgeValues(0)
+                
+                self.tableView.removeFromSuperview()
+                
+                self.payForView.removeFromSuperview()
+                
+                self.customViewForModalArrayEmpty()
+                
+            }else{
+                
+                let controller = MUAddressViewController()
+                
+               self.navigationController?.pushViewController(controller, animated: true)
+            }
+
+        }else{
+            
+            let wPopViewController = UIScreen.mainScreen().bounds.width * 0.70
+            
+            let hPopViewController = wPopViewController / 0.885
+            
+            let pointX = (UIScreen.mainScreen().bounds.width - wPopViewController)/2
+            
+            let pointY = (UIScreen.mainScreen().bounds.width - hPopViewController)/2
+            
+            let contentViewController = MURegisteredViewController()
+            
+            contentViewController.modalPresentationStyle = UIModalPresentationStyle.Popover
+            
+            contentViewController.preferredContentSize = CGSizeMake(wPopViewController, hPopViewController)
+            
+            // self.view.addSubview(contentViewController.view)
+            
+            //self.addChildViewController(contentViewController)
+            
+            let pop = contentViewController.popoverPresentationController!
+            
+            pop.canOverlapSourceViewRect = true
+            
+            //arrow does not display
+            pop.permittedArrowDirections = UIPopoverArrowDirection(rawValue: 0)
+            
+            pop.sourceView = self.view
+            
+            //let centered popViewControll
+            pop.sourceRect = CGRectMake(pointX, pointY, wPopViewController , hPopViewController)
+            
+            //self.popoverViewController?.popoverLayoutMargins = UIEdgeInsets(top: pointY, left: pointX, bottom: pointY, right: pointX)
+            
+            pop.delegate = self
+            //popViewController.popov
+            
+            self.presentViewController(contentViewController, animated: true, completion: nil)
+            
+           // contentViewController.view.frame = CGRectMake(pointX, pointY, wPopViewController , hPopViewController)
+            
+            //self.navigationController?.view.window?.addSubview(contentViewController.view)
+        }
+    
+    }
+    
+
+    private func addDataToDatabase() -> NSMutableArray{
         
-        MUSQLiteDataMeViewControllerTool.createDataBase()
+        
+        var deviation:NSString?
+        
+        var firstDate:NSString?
+        
+        let tempOrderData = NSMutableArray()
+
+         MUSQLiteDataMeViewControllerTool.createDataBase()
         
         for tArray in self.modalArray! {
             
@@ -745,13 +907,21 @@ class MUShoppingCarViewController: UIViewController,UITableViewDataSource,UITabl
             
             if mArray.count > 0 {
                 
-                for element in mArray {
+                for (index,element) in mArray.enumerate() {
                     
                     let tempGoodsData = NSMutableArray()
                     
-                    let modal = element as! MUShoppingCarModal
+                    let modal         = element as! MUShoppingCarModal
                     
                     tempGoodsData.addObject(modal.imageName!)
+                    
+                    let number        = self.numberDicitonary.valueForKey(modal.imageName!) as! Int
+                    
+                    let price         = (modal.price! as NSString).floatValue * Float(number)
+                    
+                    let priceText     = "\(price)"
+                    
+                    modal.price       = priceText
                     
                     tempGoodsData.addObject(modal.price!)
                     
@@ -761,17 +931,60 @@ class MUShoppingCarViewController: UIViewController,UITableViewDataSource,UITabl
                     
                     tempGoodsData.addObject(modal.color!)
                     
-                    let format = NSDateFormatter()
+                    let format        = NSDateFormatter()
                     
-                    let date = NSDate()
+                    let date          = NSDate()
                     
                     format.dateFormat = "yyyy/MM/dd HH/mm/ss"
                     
-                    let formatDate = format.stringFromDate(date)
+                    var formatDate    = format.stringFromDate(date)
+                    
+                    if index == 0 {
+                        
+                        let deviationFormat        = NSDateFormatter()
+                        
+                        deviationFormat.dateFormat = "yyyyMMddHHmmss"
+                        
+                        let deviationDate          = deviationFormat.stringFromDate(date)
+                        
+                        deviation                  = deviationDate
+                        
+                        firstDate = formatDate
+                        
+                    }else {
+                        
+                        if index == mArray.count - 1 {
+                            
+                            let deviationFormat        = NSDateFormatter()
+                            
+                            deviationFormat.dateFormat = "yyyyMMddHHmmss"
+                            
+                            let deviationDate          = deviationFormat.stringFromDate(date)
+                            
+                            if (deviation?.floatValue)! - (deviationDate as NSString).floatValue == 1 {
+                                
+                                formatDate                 = firstDate as! String
+                            }
+                        }
+                    }
                     
                     tempGoodsData.addObject(formatDate)
                     
                     tempGoodsData.addObject(modal.code!)
+                    
+                    tempGoodsData.addObject(number)
+                    
+                    //add comment status
+                    
+                    let commentStatus:Int = 0
+                    
+                    tempGoodsData.addObject(commentStatus)
+                    
+                    //add email
+                    let emailObject = NSUserDefaults.standardUserDefaults().valueForKey("email") as! String
+                    
+                    tempGoodsData.addObject(emailObject)
+                    
                     
                     MUSQLiteDataMeViewControllerTool.writeDataToDatabase(tempGoodsData)
                 }
@@ -781,13 +994,13 @@ class MUShoppingCarViewController: UIViewController,UITableViewDataSource,UITabl
         //totalPrice,orderDate,orderStatus
         tempOrderData.addObject(self.totalPrice!)
         
-        let date = NSDate()
+        let date            = NSDate()
         
-        let format = NSDateFormatter()
+        let format          = NSDateFormatter()
         
-        format.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        format.dateFormat   = "yyyyMMddHHmmss"
         
-        let formatData = format.stringFromDate(date)
+        let formatData      = format.stringFromDate(date)
         
         tempOrderData.addObject(formatData)
         
@@ -795,13 +1008,52 @@ class MUShoppingCarViewController: UIViewController,UITableViewDataSource,UITabl
         
         tempOrderData.addObject(orderStatus)
         
+        //add email
+        let emailObject = NSUserDefaults.standardUserDefaults().valueForKey("email") as! String
+        
+        tempOrderData.addObject(emailObject)
+        
+        return tempOrderData
+       
+    }
+    
+    private func showTips(){
         
         
-        MUSQLiteDataMeViewControllerTool.writeOrderDataToDatabase(tempOrderData)
+        // UIActivityIndicatorView.appearance().backgroundColor = UIColor(hue: 343, saturation: 87, brightness: 99, alpha: 1.0)
+        // UIProgressView.appearance().tintColor = UIColor(hue: 343, saturation: 87, brightness: 99, alpha: 1.0)
         
-        MUSQLiteDatabaseShoppingCarTool.deletedDatabase()
+        // UIProgressView.appearance().backgroundColor = UIColor(hue: 343, saturation: 87, brightness: 99, alpha: 1.0)
         
-        //let controller = MUMeViewController()
+        let tipsX = (self.view.frame.width - 300)/2.0
+        
+        let tipsY = (self.view.frame.height - 300)/2.0
+        
+        
+        let hub = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        
+        hub.mode = MBProgressHUDMode.Text
+        
+        hub.frame = CGRectMake(tipsX, tipsY, 300, 200)
+        
+        hub.label.text = "You are not logged in!"
+        
+        hub.label.font = UIFont.systemFontOfSize(12.0)
+        
+        hub.label.numberOfLines = 0
+        
+        dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), {
+            
+            sleep(2)
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                
+                hub.hideAnimated(true)
+                
+                self.navigationController?.navigationBarHidden = false
+                
+            })
+        })
         
     }
     

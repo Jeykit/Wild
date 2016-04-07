@@ -8,6 +8,7 @@
 
 import UIKit
 
-class MUIsPopViewControllerDelegate: NSObjectProtocol {
+@objc protocol MUIsPopViewControllerDelegate: NSObjectProtocol {
 
+    func IsPopViewController(flag : Bool)
 }

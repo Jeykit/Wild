@@ -328,14 +328,24 @@ NSString *kSKPSMTPPartContentTransferEncodingKey = @"kSKPSMTPPartContentTransfer
         case NSStreamEventHasBytesAvailable:
         {
             uint8_t buf[1024];
+            //uint32_t buf[1024];
             memset(buf, 0, sizeof(uint8_t) * 1024);
+            
             unsigned int len = 0;
             //エラー対応のキャスト処理
             len = (unsigned int)[(NSInputStream *)stream read:buf maxLength:1024];
             if(len) 
             {
-                NSString *tmpStr = [[NSString alloc] initWithBytes:buf length:len encoding:NSUTF8StringEncoding];
-                [inputString appendString:tmpStr];
+                NSData *data = [NSData dataWithBytes:buf length:len];
+                
+                NSString *tmpStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+               //NSString *tmpStr = [[NSString alloc] initWithBytes:buf length:len encoding:NSUTF8StringEncoding];
+                //NSString *tmpStr = [NSString stringWithCString:(char *)buf encoding:NSUTF8StringEncoding];
+               
+                NSLog(@"lenth====buf===tempStr==========,%u,%s,%@", len,buf,tmpStr);    
+                    
+              [inputString appendString:tmpStr];
+    
                 [tmpStr release];
                 
                 [self parseBuffer];

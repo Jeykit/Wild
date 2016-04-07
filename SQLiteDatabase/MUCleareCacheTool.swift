@@ -10,4 +10,21 @@ import UIKit
 
 class MUCleareCacheTool: NSObject {
 
+   class func CleareCache() {
+        
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("username")
+        
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("email")
+        
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("headerImage")
+        
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("bImage")
+        
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("address")
+    
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("badges")
+    
+        NSUserDefaults.standardUserDefaults().synchronize()
+
+    }
 }

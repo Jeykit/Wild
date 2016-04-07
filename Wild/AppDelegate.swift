@@ -1,3 +1,4 @@
+
 //
 //  AppDelegate.swift
 //  Wild
@@ -16,6 +17,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+
+        //UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
+        let rootViewController = MUViewController()
+        
+        let flag:Bool = false
+        
+        NSUserDefaults.standardUserDefaults().setObject(flag, forKey: "flag")
+        
+        NSUserDefaults.standardUserDefaults().synchronize()
+        
+        //initalization shoppingCar values
+        if !MUButtonBdageTool.buttonBadgeObject(){
+            
+            MUButtonBdageTool.initButtonBadgeValues(0)
+        }
+    
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        
+        self.window!.rootViewController = rootViewController;
+        //rootController.view.frame = UIScreen.mainScreen().bounds
+        self.window?.makeKeyAndVisible()
+        
+        if (Reachability.reachabilityForInternetConnection() != nil) {
+            
+            let appID = NSString(format: "appid = 567a9d49")
+            
+            IFlySpeechUtility.createUtility(appID as String)
+
+        }
+       // [IFlySpeechUtility createUtility:appId];
+        
         return true
     }
 
@@ -40,7 +72,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
+    func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> UIInterfaceOrientationMask {
+        
+        return UIInterfaceOrientationMask.Portrait
+    }
 }
 

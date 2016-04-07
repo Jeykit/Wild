@@ -10,4 +10,21 @@ import UIKit
 
 class MUUserListModal: NSObject {
 
+    var emailText:String?
+    
+    var passwordText:String?
+    
+    var userNameText:String = "Adaman"
+    
+    var headerImageText:String = "Me_userImage_defalut_78"
+    
+    var backgroundImageText:String = "Me_bg_defalut_66"
+    
+    var addressText:String = "San Francisco California"
+    
+    
+    
+    
+    
+    
 }

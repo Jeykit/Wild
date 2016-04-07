@@ -10,4 +10,20 @@ import UIKit
 
 class MUAddressModal: NSObject {
 
+    
+    var email:String?
+    
+    var receiver:String?
+    
+    var zipCode:String?
+    
+    var phoneNumber:String?
+    
+    var address:String?
+    
+    var date:String?
+    
+    var defalut:Int?
+    
+    
 }

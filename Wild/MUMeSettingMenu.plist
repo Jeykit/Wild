@@ -1,14 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<!--
-   MUMeSettingMenu.plist
-   Wild
-
-   Created by Adaman on 2/22/16.
-   Copyright (c) 2016 Adaman. All rights reserved.
--->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-    <dict>
-    
-    </dict>
+<array>
+	<dict>
+		<key>text</key>
+		<string>Add delivery address</string>
+		<key>imageName</key>
+		<string>address</string>
+	</dict>
+	<dict>
+		<key>text</key>
+		<string>VoicePrint</string>
+		<key>imageName</key>
+		<string>synthesics</string>
+	</dict>
+	<dict>
+		<key>text</key>
+		<string>Clean cache</string>
+		<key>imageName</key>
+		<string>clean</string>
+	</dict>
+	<dict>
+		<key>text</key>
+		<string>Version update</string>
+		<key>imageName</key>
+		<string>version</string>
+	</dict>
+</array>
 </plist>

@@ -10,4 +10,18 @@ import UIKit
 
 class MUMeOrderedModal: NSObject {
 
+    //totalPrice,orderDate,orderStatus
+    var totalPrice:String?
+    
+    var orderDate:String?
+    
+    var orderStatus:Int?
+    
+    var emailText:String?
+    
+    var addressDate:String?
+    
+    
+    
+    var orderedGoodsModals:NSMutableArray?
 }

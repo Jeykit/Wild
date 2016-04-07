@@ -8,6 +8,7 @@
 
 import UIKit
 
-class MUCommentDelegate: NSObject {
+@objc protocol MUCommentDelegate: NSObjectProtocol {
 
+    func submitButtonByclickError(alertText : String,flag : Bool,indexPath : NSIndexPath)
 }

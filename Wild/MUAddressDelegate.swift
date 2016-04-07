@@ -8,6 +8,14 @@
 
 import UIKit
 
-class MUAddressDelegate: NSObject {
+@objc protocol MUAddressDelegate: NSObjectProtocol {
 
+    optional func editButtonByClicked(modal:MUAddressModal,indexPath:NSIndexPath)
+    
+    optional func checkedImageViewByTap(indexPath : NSIndexPath)
+    
+    optional func emptyEmail()
+    
+    optional func addNewDataToDatabase()
+   
 }

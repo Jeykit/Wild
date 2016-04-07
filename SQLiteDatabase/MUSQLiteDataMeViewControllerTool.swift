@@ -20,9 +20,9 @@ class MUSQLiteDataMeViewControllerTool: NSObject {
         let path = filePath.stringByAppendingPathComponent("goods.sqlite") as String
         //let filePath:NSString = NSBundle.mainBundle().pathForResource("goods", ofType: "sqlite")!
         
-        let createDatabase = "CREATE TABLE IF NOT EXISTS T_PurchasedGoods (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,imageName TEXT NOT NULL UNIQUE,price TEXT NOT NULL,title TEXT NOT NULL,size TEXT NOT NULL,color TEXT NOT NULL,date TEXT NOT NULL,code TEXT NOT NULL)"
+        let createDatabase = "CREATE TABLE IF NOT EXISTS T_PurchasedGoods (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,imageName TEXT NOT NULL ,price TEXT NOT NULL,title TEXT NOT NULL,size TEXT NOT NULL,color TEXT NOT NULL,date TEXT NOT NULL,code TEXT NOT NULL,number INTEGER NOT NULL,commentStatus INTEGER NOT NULL,email TEXT NOT NULL)"
         
-        let ordered = "CREATE TABLE IF NOT EXISTS T_Ordered (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,totalPrice TEXT NOT NULL,orderDate TEXT NOT NULL,orderStatus INTEGER NOT NULL)"
+        let ordered = "CREATE TABLE IF NOT EXISTS T_Ordered (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,totalPrice TEXT NOT NULL,orderDate TEXT NOT NULL,orderStatus INTEGER NOT NULL,email TEXT NOT NULL,addressDate TEXT NOT NULL)"
         
         queue = FMDatabaseQueue(path: path as String)
         
@@ -55,7 +55,7 @@ class MUSQLiteDataMeViewControllerTool: NSObject {
         
         let path = filePath.stringByAppendingPathComponent("goods.sqlite") as String
         
-        let insertData = "INSERT INTO T_PurchasedGoods (imageName,price,title,size,color,date,code) VALUES (?,?,?,?,?,?,?)"
+        let insertData = "INSERT INTO T_PurchasedGoods (imageName,price,title,size,color,date,code,number,commentStatus,email) VALUES (?,?,?,?,?,?,?,?,?,?)"
         
         queue = FMDatabaseQueue(path: path as String)
         
@@ -72,16 +72,16 @@ class MUSQLiteDataMeViewControllerTool: NSObject {
     
     class func writeOrderDataToDatabase(orderArray:NSArray){
         
-        let queue:FMDatabaseQueue?
-        
-        let filePath:NSString = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0]
+       let queue:FMDatabaseQueue?
+
+       let filePath:NSString = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0]
         // let filePath:NSString = NSBundle.mainBundle().pathForResource("goods", ofType: "sqlite")!
+
+       let path              = filePath.stringByAppendingPathComponent("goods.sqlite") as String
+
+       let insertOrderData   = "INSERT INTO T_Ordered (totalPrice,orderDate,orderStatus,email,addressDate) VALUES (?,?,?,?,?)"
         
-        let path = filePath.stringByAppendingPathComponent("goods.sqlite") as String
-        
-       let insertOrderData = "INSERT INTO T_Ordered (totalPrice,orderDate,orderStatus) VALUES (?,?,?)"
-        
-        print("\(path)")
+        //print("\(path)")
         
         queue = FMDatabaseQueue(path: path as String)
         
@@ -96,7 +96,7 @@ class MUSQLiteDataMeViewControllerTool: NSObject {
         
     }
     
-    class func readDataFromDatabase() -> NSMutableArray{
+    class func readDataFromDatabase(emailText : String) -> NSMutableArray{
         
         var tempArray = NSMutableArray()
         
@@ -106,7 +106,7 @@ class MUSQLiteDataMeViewControllerTool: NSObject {
         
         let path = filePath.stringByAppendingPathComponent("goods.sqlite") as String
         
-        let queryData = "SELECT * FROM T_PurchasedGoods"
+        let queryData = "SELECT * FROM T_PurchasedGoods WHERE email = ?"
         
         queue = FMDatabaseQueue(path: path)
         
@@ -115,11 +115,11 @@ class MUSQLiteDataMeViewControllerTool: NSObject {
             db.open()
             
             
-            let rs:FMResultSet =  db.executeQuery(queryData, withArgumentsInArray: [])
+            let rs:FMResultSet =  db.executeQuery(queryData, withArgumentsInArray: [emailText])
             
             while (rs.next()) {
                 
-                //imageName,price,title,size,color,time,date
+                //imageName,price,title,size,color,date
                 let modal = MUMeOrderedGoodsModal()
                 
                 modal.imageName = rs.stringForColumn("imageName")
@@ -131,28 +131,43 @@ class MUSQLiteDataMeViewControllerTool: NSObject {
                 modal.size = rs.stringForColumn("size")
                 
                 modal.date = rs.stringForColumn("date")
+                
+                modal.price = rs.stringForColumn("price")
+                
+                modal.numberOfBuy = Int(rs.intForColumn("number"))
+                
+                modal.saleCode = rs.stringForColumn("code")
+                
+                modal.commentStatus = Int(rs.stringForColumn("commentStatus"))
+                
+                modal.email = rs.stringForColumn("email")
 
                 tempArray.addObject(modal)
             }
             db.close()
         })
         
-        tempArray = self.sortByDataarray(tempArray)
-        
-        tempArray = self.sortGroupFromArray(tempArray)
+        if tempArray.count > 0 {
+            
+            tempArray = self.sortByDataarray(tempArray)
+            
+            tempArray = self.sortGroupFromArray(tempArray)
+        }
         
         return tempArray
         
     }
     
-    class func readOrderedDataFromDatabase() -> NSMutableArray{
+    class func readOrderedDataFromDatabase(emailText : String) -> NSMutableArray{
         
         let tempArray = NSMutableArray()
         
         //get the array corresponding to modal
         var flag:Int = 0
         
-        let groupArray = self.readDataFromDatabase()
+        let groupArray = self.readDataFromDatabase(emailText)
+        
+        //print("====================\(groupArray.count)")
         
         let queue:FMDatabaseQueue?
         
@@ -160,7 +175,7 @@ class MUSQLiteDataMeViewControllerTool: NSObject {
         
         let path = filePath.stringByAppendingPathComponent("goods.sqlite") as String
         
-        let queryData = "SELECT * FROM T_Ordered"
+        let queryData = "SELECT * FROM T_Ordered WHERE email = ?"
         
         queue = FMDatabaseQueue(path: path)
         
@@ -169,31 +184,42 @@ class MUSQLiteDataMeViewControllerTool: NSObject {
             db.open()
             
             
-            let rs:FMResultSet =  db.executeQuery(queryData, withArgumentsInArray: [])
+            let rs:FMResultSet =  db.executeQuery(queryData, withArgumentsInArray: [emailText])
             
             while (rs.next()) {
                 
                 //totalPrice,orderDate,orderStatus
-                let modal = MUMeOrderedModal()
-                
-                modal.totalPrice = rs.stringForColumn("totalPrice")
-                
-                modal.orderDate = rs.stringForColumn("orderDate")
-                
+                let modal         = MUMeOrderedModal()
+
+                modal.totalPrice  = rs.stringForColumn("totalPrice")
+
+                modal.orderDate   = rs.stringForColumn("orderDate")
+
                 modal.orderStatus = Int(rs.intForColumn("orderStatus"))
+
+                modal.addressDate = rs.stringForColumn("addressDate")
                 
-                if groupArray.count > 0 {
+                if groupArray.count > 0 && flag < groupArray.count {
+                    
+                   // print("============\(groupArray.count)")
                     
                     modal.orderedGoodsModals = groupArray[flag] as? NSMutableArray
                     
                     flag = flag + 1
+             
                 }
                 
-                tempArray.addObject(modal)
+                  tempArray.addObject(modal)
+                  //print("====================\( modal.orderedGoodsModals?.count)")
+               // }
+
             }
+            
+            rs.close()
             db.close()
         })
         
+        //print("================\(flag)")
         
         return tempArray
         
@@ -204,22 +230,25 @@ class MUSQLiteDataMeViewControllerTool: NSObject {
         
         var currentDate:String? = (tempArray[0] as! MUMeOrderedGoodsModal).date
         
+        //print("====================",currentDate)
+        
         let groupArray:NSMutableArray? = []
         
         var tArray:NSMutableArray? = []
         
-        for (index,element) in tempArray.enumerate() {
+        for (_,element) in tempArray.enumerate() {
             
-            let modal = element as! MUShoppingCarModal
+            let modal = element as! MUMeOrderedGoodsModal
             
             if modal.date == currentDate {
                 
-                tArray?.addObject(modal)
                 
-                if index == tempArray.count - 1 {
-                    
-                    groupArray?.addObject(tArray!)
-                }
+                tArray!.addObject(modal)
+                
+//                if index == tempArray.count - 1 {
+//                    
+//                    groupArray?.addObject(tArray!)
+//                }
                 
             }else{
                 
@@ -227,11 +256,19 @@ class MUSQLiteDataMeViewControllerTool: NSObject {
                 
                 tArray = NSMutableArray()
                 
-                currentDate = modal.date
+                currentDate = modal.date!
                 
-                tArray?.addObject(modal)
+                tArray!.addObject(modal)
+//                
+//                if index == tempArray.count - 1 {
+//                    
+//                    groupArray?.addObject(tArray!)
+//                }
             }
         }
+        
+         groupArray?.addObject(tArray!)
+        
         
         return groupArray!
     }
@@ -263,6 +300,30 @@ class MUSQLiteDataMeViewControllerTool: NSObject {
         
         return NSMutableArray(array: temp)
         
+    }
+
+    class func updateDataToDatabase(updataField : String,upDateDataWithEmail:NSMutableArray){
+        
+        let queue:FMDatabaseQueue?
+        
+        let filePath:NSString = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0]
+        // let filePath:NSString = NSBundle.mainBundle().pathForResource("goods", ofType: "sqlite")!
+        
+        let path = filePath.stringByAppendingPathComponent("goods.sqlite") as String
+        //let filePath:NSString = NSBundle.mainBundle().pathForResource("goods", ofType: "sqlite")!
+        
+        let insertData = "UPDATE T_PurchasedGoods set " + updataField + "= ? WHERE email = ?"
+        
+        queue = FMDatabaseQueue(path: path)
+        
+        queue?.inDatabase({ (db) -> Void in
+            
+            db.open()
+            
+            db.executeUpdate(insertData, withArgumentsInArray: upDateDataWithEmail as [AnyObject])
+            
+            db.close()
+        })
     }
 
 

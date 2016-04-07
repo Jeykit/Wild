@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<!--
-   menuList.plist
-   Wild
-
-   Created by Adaman on 1/27/16.
-   Copyright (c) 2016 Adaman. All rights reserved.
--->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-    <dict>
-    
-    </dict>
+<array>
+	<string>Women</string>
+	<string>Men</string>
+	<string>Childen</string>
+	<string>Gilrds</string>
+	<string>T-Shirt</string>
+	<string>Coat</string>
+	<string>Bag</string>
+	<string>Shope</string>
+	<string>Jean</string>
+	<string>Cheat</string>
+</array>
 </plist>

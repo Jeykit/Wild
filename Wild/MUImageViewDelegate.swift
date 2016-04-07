@@ -8,6 +8,9 @@
 
 import UIKit
 
-class MUImageViewDelegate: NSObject {
-
+@objc protocol MUImageViewDelegate: NSObjectProtocol {
+    
+    func imageViewByTap(flag : Int)
+    
+    func buttonByClicked()
 }

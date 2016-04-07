@@ -10,4 +10,8 @@ import UIKit
 
 class MUGoodsImageModal: NSObject {
 
+    var keyName:String = ""
+    
+    var valueView : UIView?
+    
 }

@@ -8,6 +8,12 @@
 
 import UIKit
 
-class MUDelegate: NSObjectProtocol {
+@objc protocol MUDelegate: NSObjectProtocol {
 
+    
+    func getImage(img:UIImage)
+    
+    optional func handlerLoginButton(is_login : Bool)
+    
+   // func getRectFromCell(var rect:CGRect)
 }
