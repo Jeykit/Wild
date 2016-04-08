@@ -23,7 +23,7 @@ class MUMenuViewController: UIViewController,UITableViewDataSource,UITableViewDe
     
     var delegate:MUDelegate?
     
-    
+    private var indexPath:NSIndexPath?
     //var imageView = UIImageView()
     
     
@@ -57,6 +57,13 @@ class MUMenuViewController: UIViewController,UITableViewDataSource,UITableViewDe
         
         //print(self.tableView.rowHeight)
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+        
+        let preIndexPath = NSIndexPath(forRow: 0, inSection: 0)
+        
+        self.tableView.selectRowAtIndexPath(preIndexPath, animated: true, scrollPosition: UITableViewScrollPosition.Top)
+        
+        self.indexPath = preIndexPath
+        
         
         self.view.addSubview(self.tableView)
         
@@ -189,12 +196,38 @@ class MUMenuViewController: UIViewController,UITableViewDataSource,UITableViewDe
         
         cell.textLabel?.textAlignment = NSTextAlignment.Left
         
-        //cell.textLabel?.textAlignment = NSTextAlignment.Center
+        if (self.indexPath != nil) {
+            
+            if self.indexPath == indexPath {
+                
+                cell.textLabel?.textColor = UIColor.customColor()
+            }
+        }else{
+            
+            if indexPath.row == 0 {
+                
+                cell.textLabel?.textColor = UIColor.customColor()
+            }
+        }
         
         
         //cell.backgroundColor = UIColor.brownColor()
         //print("234254")
         return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        
+        cell?.textLabel?.textColor = UIColor.customColor()
+        
+        let preCell = tableView.cellForRowAtIndexPath(self.indexPath!)
+        
+        preCell?.textLabel?.textColor = UIColor.customBlack()
+        
+        self.indexPath = indexPath
+        
     }
 
 }

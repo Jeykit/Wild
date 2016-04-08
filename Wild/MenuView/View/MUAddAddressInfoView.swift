@@ -11,13 +11,13 @@ import UIKit
 class MUAddAddressInfoView: UIView {
 
     
-    private let userName = UITextField()
+    private let userName = MUCustomTextField()
     
-    private let zipTextFiled = UITextField()
+    private let zipTextFiled = MUCustomTextField()
     
-    private let phoneTextFiled = UITextField()
+    private let phoneTextFiled = MUCustomTextField()
     
-    private let addressTextFiled = UITextField()
+    private let addressTextFiled = MUCustomTextField()
     
     private  var headerLabel = UILabel()
     
@@ -124,6 +124,8 @@ class MUAddAddressInfoView: UIView {
         
         userName.translatesAutoresizingMaskIntoConstraints = false
         
+        userName.contentMode = UIViewContentMode.TopLeft
+        
         userName.placeholder = "name"
         
         userName.placeholderRectForBounds(CGRectMake(12.0,0,userName.frame.width,userName.frame.height))
@@ -136,7 +138,7 @@ class MUAddAddressInfoView: UIView {
         
         userName.layer.borderWidth = 1.0
         
-        userName.textRectForBounds(CGRectMake(0, 12.0, userName.frame.width - 12, userName.frame.height))
+        //userName.textRectForBounds(CGRectMake(0, 12.0, userName.frame.width - 12, userName.frame.height))
         
         sView.addSubview(userName)
         
@@ -154,7 +156,7 @@ class MUAddAddressInfoView: UIView {
         
         zipTextFiled.clearButtonMode = UITextFieldViewMode.WhileEditing
         
-        zipTextFiled.textRectForBounds(CGRectMake(0, 12.0, zipTextFiled.frame.width - 12, zipTextFiled.frame.height))
+        //zipTextFiled.textRectForBounds(CGRectMake(0, 12.0, zipTextFiled.frame.width - 12, zipTextFiled.frame.height))
         
         sView.addSubview(zipTextFiled)
         
@@ -164,6 +166,8 @@ class MUAddAddressInfoView: UIView {
         
         phoneTextFiled.placeholder = "number"
         
+        phoneTextFiled.contentMode = UIViewContentMode.TopLeft
+        
         phoneTextFiled.backgroundColor = UIColor.customWhite()
         
         phoneTextFiled.layer.borderColor = UIColor.customBlack().CGColor
@@ -172,7 +176,7 @@ class MUAddAddressInfoView: UIView {
         
         phoneTextFiled.layer.borderWidth = 1.0
         
-        phoneTextFiled.textRectForBounds(CGRectMake(0, 12.0, phoneTextFiled.frame.width - 12, phoneTextFiled.frame.height))
+       // phoneTextFiled.textRectForBounds(CGRectMake(0, 12.0, phoneTextFiled.frame.width - 12, phoneTextFiled.frame.height))
         
         sView.addSubview(phoneTextFiled)
         
@@ -182,21 +186,23 @@ class MUAddAddressInfoView: UIView {
         
         addressTextFiled.placeholder = "address"
         
+        addressTextFiled.contentMode = UIViewContentMode.TopLeft
+        
         addressTextFiled.clearButtonMode = UITextFieldViewMode.WhileEditing
         
         addressTextFiled.backgroundColor = UIColor.customWhite()
         
         addressTextFiled.layer.borderColor = UIColor.customBlack().CGColor
         
-        addressTextFiled.contentMode = UIViewContentMode.Top
+        //addressTextFiled.contentMode = UIViewContentMode.Top
         
         addressTextFiled.layer.borderWidth = 1.0
         
-        addressTextFiled.textRectForBounds(CGRectMake(0, 12.0, addressTextFiled.frame.width - 12, addressTextFiled.frame.height))
+        //addressTextFiled.textRectForBounds(CGRectMake(0, 12.0, addressTextFiled.frame.width - 12, addressTextFiled.frame.height))
         
         sView.addSubview(addressTextFiled)
         
-        let vConstraintVFL = "V:|-12-[userName(==30)]-12-[zipTextFiled(==30)]-12-[phoneTextFiled(==30)]-12-[addressTextFiled(==128)]"
+        let vConstraintVFL = "V:|-12-[userName(==44)]-12-[zipTextFiled(==44)]-12-[phoneTextFiled(==44)]-12-[addressTextFiled(==128)]"
         
         let vConstraint = NSLayoutConstraint.constraintsWithVisualFormat(vConstraintVFL, options: NSLayoutFormatOptions.AlignAllLeft.union(NSLayoutFormatOptions.AlignAllRight), metrics: nil, views: ["userName" : userName,"zipTextFiled" : zipTextFiled,"phoneTextFiled" : phoneTextFiled,"addressTextFiled" : addressTextFiled])
         

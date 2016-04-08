@@ -49,7 +49,7 @@ class MUAddressCollectionViewCell: UICollectionViewCell,UIGestureRecognizerDeleg
         
         let userImageView = UIImageView()
         
-        userImageView.image = UIImage(named: "User-address")
+        userImageView.image = UIImage(named: "User-address-gray")
         
         userImageView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -67,7 +67,7 @@ class MUAddressCollectionViewCell: UICollectionViewCell,UIGestureRecognizerDeleg
         
         let phoneImageView = UIImageView()
         
-        phoneImageView.image = UIImage(named: "iPhone-4-address")
+        phoneImageView.image = UIImage(named: "iPhone-4-gray")
         
         phoneImageView.translatesAutoresizingMaskIntoConstraints = false
         

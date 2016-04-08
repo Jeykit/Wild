@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "40828DFBB497477D129C08483F08F4BD92544263",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "40828DFBB497477D129C08483F08F4BD92544263" : 0,
+    "7E02CBF2157F325540E7E677AEB498725D9C6DB2" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "051284AD-9880-4B6A-8904-C01D220BB63E",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "40828DFBB497477D129C08483F08F4BD92544263" : "Wild\/",
+    "7E02CBF2157F325540E7E677AEB498725D9C6DB2" : ".."
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Wild",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Wild.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Jeykit\/MyGit.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "40828DFBB497477D129C08483F08F4BD92544263"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Jeykit\/MyGit.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7E02CBF2157F325540E7E677AEB498725D9C6DB2"
+    }
+  ]
+}

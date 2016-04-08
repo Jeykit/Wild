@@ -141,6 +141,7 @@ class MUSettingTableViewController: UITableViewController {
         
         let cell = tableView.cellForRowAtIndexPath(indexPath)! as UITableViewCell
         
+
         if cell.textLabel?.text == "VoicePrint" {
             
             self.navigationView?.removeFromSuperview()
@@ -160,6 +161,7 @@ class MUSettingTableViewController: UITableViewController {
             let controller = MUAddressViewController()
             
             self.navigationController!.pushViewController(controller, animated: true)
+            
         }
     }
 

@@ -32,11 +32,15 @@
 		7C5842D71C9D788500CFC408 /* MUMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5842D61C9D788400CFC408 /* MUMenuViewController.swift */; };
 		7C5AAA0A1CA6B5C9009BE194 /* snipping.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C5AAA091CA6B5C9009BE194 /* snipping.png */; };
 		7C6C71B91CA395E5003BF478 /* MUTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6C71B81CA395E5003BF478 /* MUTextField.swift */; };
+		7C6F66E11CB7983F00FE52EC /* customWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6F66E01CB7983F00FE52EC /* customWindow.swift */; };
+		7C6F66E31CB79FE000FE52EC /* MUCustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6F66E21CB79FE000FE52EC /* MUCustomTextField.swift */; };
 		7C82F83E1C8A823E00179593 /* MULabelTextByClickDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C82F83D1C8A823D00179593 /* MULabelTextByClickDelegate.swift */; };
 		7C87AA2A1CB4F5AE0096D8E2 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C87AA291CB4F5AE0096D8E2 /* Launch Screen.storyboard */; };
 		7C8988641C7CA670006ED832 /* MURectFromCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C8988631C7CA670006ED832 /* MURectFromCellDelegate.swift */; };
 		7C8CF3511CB5043B006FE0B6 /* shawl_yellow_back.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7C8CF34F1CB5043B006FE0B6 /* shawl_yellow_back.jpg */; };
 		7C8CF3521CB5043B006FE0B6 /* shawl_yellow_full.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7C8CF3501CB5043B006FE0B6 /* shawl_yellow_full.jpg */; };
+		7C92B7BC1CB7548000C29C9B /* MUReplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C92B7BB1CB7547E00C29C9B /* MUReplayViewController.swift */; };
+		7C92B7BE1CB754D400C29C9B /* ReplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C92B7BD1CB754D400C29C9B /* ReplayKit.framework */; };
 		7C9534551CAA4F7B000F1010 /* MUCleareCacheTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9534541CAA4F7B000F1010 /* MUCleareCacheTool.swift */; };
 		7C9534571CAA7AC2000F1010 /* MUCommentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9534561CAA7AC1000F1010 /* MUCommentDelegate.swift */; };
 		7C9534591CAA802E000F1010 /* MUSQLiteCommentTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9534581CAA802E000F1010 /* MUSQLiteCommentTool.swift */; };
@@ -283,11 +287,15 @@
 		7C5842D61C9D788400CFC408 /* MUMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MUMenuViewController.swift; sourceTree = "<group>"; };
 		7C5AAA091CA6B5C9009BE194 /* snipping.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = snipping.png; path = ../Navigation/snipping.png; sourceTree = "<group>"; };
 		7C6C71B81CA395E5003BF478 /* MUTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MUTextField.swift; sourceTree = "<group>"; };
+		7C6F66E01CB7983F00FE52EC /* customWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = customWindow.swift; sourceTree = "<group>"; };
+		7C6F66E21CB79FE000FE52EC /* MUCustomTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MUCustomTextField.swift; sourceTree = "<group>"; };
 		7C82F83D1C8A823D00179593 /* MULabelTextByClickDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MULabelTextByClickDelegate.swift; sourceTree = "<group>"; };
 		7C87AA291CB4F5AE0096D8E2 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = "Launch Screen.storyboard"; path = "../Launch Screen.storyboard"; sourceTree = "<group>"; };
 		7C8988631C7CA670006ED832 /* MURectFromCellDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MURectFromCellDelegate.swift; sourceTree = "<group>"; };
 		7C8CF34F1CB5043B006FE0B6 /* shawl_yellow_back.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = shawl_yellow_back.jpg; path = Shwal/shawl_yellow_back.jpg; sourceTree = "<group>"; };
 		7C8CF3501CB5043B006FE0B6 /* shawl_yellow_full.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = shawl_yellow_full.jpg; path = Shwal/shawl_yellow_full.jpg; sourceTree = "<group>"; };
+		7C92B7BB1CB7547E00C29C9B /* MUReplayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MUReplayViewController.swift; sourceTree = "<group>"; };
+		7C92B7BD1CB754D400C29C9B /* ReplayKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReplayKit.framework; path = System/Library/Frameworks/ReplayKit.framework; sourceTree = SDKROOT; };
 		7C9534541CAA4F7B000F1010 /* MUCleareCacheTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MUCleareCacheTool.swift; sourceTree = "<group>"; };
 		7C9534561CAA7AC1000F1010 /* MUCommentDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MUCommentDelegate.swift; sourceTree = "<group>"; };
 		7C9534581CAA802E000F1010 /* MUSQLiteCommentTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MUSQLiteCommentTool.swift; sourceTree = "<group>"; };
@@ -461,7 +469,7 @@
 		7CD868C71CA5160000CA87C4 /* PcmPlayerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PcmPlayerDelegate.h; sourceTree = "<group>"; };
 		7CD868C91CA5335E00CA87C4 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		7CD868CB1CA55E2400CA87C4 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		7CDAD0961C8EADAB00BA97CE /* goods.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = goods.sqlite; path = SQLiteDatabase/goods.sqlite; sourceTree = "<group>"; };
+		7CDAD0961C8EADAB00BA97CE /* goods.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = goods.sqlite; sourceTree = "<group>"; };
 		7CDAD0981C8EDECF00BA97CE /* MUImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MUImageView.swift; sourceTree = "<group>"; };
 		7CDAD09C1C8EFC8200BA97CE /* MUImageViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MUImageViewDelegate.swift; sourceTree = "<group>"; };
 		7CDB62941CAE761500E06C3C /* MUDetailHeaderFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MUDetailHeaderFooterView.swift; sourceTree = "<group>"; };
@@ -506,6 +514,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C92B7BE1CB754D400C29C9B /* ReplayKit.framework in Frameworks */,
 				7CD868CC1CA55E2400CA87C4 /* CFNetwork.framework in Frameworks */,
 				7CD868CA1CA5335E00CA87C4 /* MessageUI.framework in Frameworks */,
 				7C0DB1621CA97F9300328998 /* MapKit.framework in Frameworks */,
@@ -581,6 +590,7 @@
 		7CB17E771CA430A400550FBF /* framework */ = {
 			isa = PBXGroup;
 			children = (
+				7C92B7BD1CB754D400C29C9B /* ReplayKit.framework */,
 				7C0B35251C80390800E8F319 /* libsqlite3.0.tbd */,
 				7C0DB1611CA97F9300328998 /* MapKit.framework */,
 				7CD868CB1CA55E2400CA87C4 /* CFNetwork.framework */,
@@ -798,6 +808,7 @@
 				7CF7565A1CA2D7EA000F3054 /* MURegisteredViewController.swift */,
 				7CDB67101CABC4BD0078DE24 /* MUSynthesisViewController.swift */,
 				7C2E6FD01CB0E0C0001E538B /* MUAddressViewController.swift */,
+				7C92B7BB1CB7547E00C29C9B /* MUReplayViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -842,6 +853,7 @@
 				7C2E6FD21CB0EAD1001E538B /* MUAddressView.swift */,
 				7C2E6FD41CB1092A001E538B /* MUAddAddressInfoView.swift */,
 				7C2E6FD61CB16836001E538B /* MUAddressCollectionViewCell.swift */,
+				7C6F66E21CB79FE000FE52EC /* MUCustomTextField.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -883,6 +895,7 @@
 		7CD6F55C1C53232D00B34D5D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7C6F66E01CB7983F00FE52EC /* customWindow.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -918,6 +931,7 @@
 		7CDAD0951C8EAD8F00BA97CE /* SQLiteDatabase */ = {
 			isa = PBXGroup;
 			children = (
+				7CDAD0961C8EADAB00BA97CE /* goods.sqlite */,
 				7CBDAC701C9CEAF50003166D /* SQLiteDatabaseTool.swift */,
 				7CD755D91C9FB23300B47ED5 /* MUSQLiteDataMeViewControllerTool.swift */,
 				7CF5B0481CA7872000B859A7 /* MUSQLiteToolForContenViewController.swift */,
@@ -943,7 +957,6 @@
 			children = (
 				7CDB67081CAB7A270078DE24 /* UIButton+Badge */,
 				7CB17E771CA430A400550FBF /* framework */,
-				7CDAD0961C8EADAB00BA97CE /* goods.sqlite */,
 				7CD7E7E11CA6780600707CB5 /* Network detection */,
 				7CD7E7DD1CA6261700707CB5 /* MBProgressHUD */,
 				7C07D3F01CA56E0C00BBD973 /* SMTPLibrary */,
@@ -1292,6 +1305,7 @@
 				7CB9ACBC1CAFB30A000AA80B /* MUSettingTableViewCell.swift in Sources */,
 				7CE37B1A1C79EEE500842821 /* MUMeOrderModal.swift in Sources */,
 				7CBD3DA81CB17A8E007D5432 /* MUAddressDelegate.swift in Sources */,
+				7C6F66E11CB7983F00FE52EC /* customWindow.swift in Sources */,
 				7CE322921C91A9D500AD28FF /* MUShoppingCarViewCellDelegate.swift in Sources */,
 				7C962D011C734B6300432140 /* MUMeViewController.swift in Sources */,
 				7CF5B0491CA7872100B859A7 /* MUSQLiteToolForContenViewController.swift in Sources */,
@@ -1308,6 +1322,7 @@
 				7CDC58931C7EC327009094D9 /* MUShoppingCarModal.swift in Sources */,
 				7CDB62951CAE761500E06C3C /* MUDetailHeaderFooterView.swift in Sources */,
 				7CD7BD721CB21419005ED15C /* MUAddressModal.swift in Sources */,
+				7C6F66E31CB79FE000FE52EC /* MUCustomTextField.swift in Sources */,
 				7C37DB791C7D96BE000642CB /* MUShoppingCarTableViewCell.swift in Sources */,
 				7C9534551CAA4F7B000F1010 /* MUCleareCacheTool.swift in Sources */,
 				7C95345B1CAA91F3000F1010 /* MUCommentModal.swift in Sources */,
@@ -1324,6 +1339,7 @@
 				7CBDAC711C9CEAF50003166D /* SQLiteDatabaseTool.swift in Sources */,
 				7CDE12921C57568300EE0486 /* MUDelegate.swift in Sources */,
 				7CF5B04D1CA7F04200B859A7 /* MUUserListModal.swift in Sources */,
+				7C92B7BC1CB7548000C29C9B /* MUReplayViewController.swift in Sources */,
 				7CDB670D1CAB86AD0078DE24 /* MUButtonBdageTool.swift in Sources */,
 				7C07D3FF1CA56E0C00BBD973 /* SKPSMTPMessage.m in Sources */,
 				7C2E6FD71CB16837001E538B /* MUAddressCollectionViewCell.swift in Sources */,

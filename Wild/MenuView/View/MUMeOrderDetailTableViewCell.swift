@@ -54,7 +54,7 @@ class MUMeOrderDetailTableViewCell: UITableViewCell {
     
     private var commentView:UIView?
     
-    private var textField:UITextField?
+    private var textField:MUCustomTextField?
     
     private var score:Int = 0
     
@@ -281,7 +281,7 @@ class MUMeOrderDetailTableViewCell: UITableViewCell {
         
         self.commentView?.addSubview(commentSubViews)
         
-        textField = UITextField()
+        textField = MUCustomTextField()
         
         textField!.translatesAutoresizingMaskIntoConstraints = false
         

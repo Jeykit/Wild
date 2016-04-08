@@ -144,7 +144,7 @@ class MUAddressViewController: UIViewController,UICollectionViewDelegate,UIColle
 
         collectionView!.registerClass(MUAddressCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         
-        self.addressView = MUAddAddressInfoView(frame: CGRectMake(0,192.0,self.view.frame.width,392.0))
+        self.addressView = MUAddAddressInfoView(frame: CGRectMake(0,192.0,self.view.frame.width,434.0))
         
         //print("==============\(sview.textHeight)")
         
