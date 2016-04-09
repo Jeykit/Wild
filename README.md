@@ -4,6 +4,8 @@ XCode7.1+ iOS9.2+
 
 完全适配ipad，iphone（无真机）没有适配完成。
 
-使用第三方库有“skpsmtpmessage ”，后台发送邮件；“mbprogresshud”，一朵伟大的菊花；“fdmb”，一款简单易用的sqlite封装库。
+使用第三方库有“skpsmtpmessage ”，后台发送邮件；“mbprogresshud”，一朵伟大的菊花；“fdmb”，一款简单易用的sqlite封装库。"TTTAttributedLabel"创建丰富变化的UILabel，实现文字的点击效果。
 
 如果您有任何建议或意见，请将邮件发送至392071745@qq.com或者jekity@outlook.com
+
+![image](https://github.com/Jeykit/Wild/blob/master/gif/wild.gif) 
