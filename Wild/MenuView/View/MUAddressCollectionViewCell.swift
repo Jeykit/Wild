@@ -299,6 +299,9 @@ class MUAddressCollectionViewCell: UICollectionViewCell,UIGestureRecognizerDeleg
         
         delegate?.editButtonByClicked!(self.modal!, indexPath: self.indexPath!)
         
+        self.checkImageView.image = UIImage(named: "checkmark")
+        
+        self.isCheckMacker = true
     }
     
     override func prepareForReuse() {

@@ -194,22 +194,23 @@ class MUOrderTableViewController: UITableViewController,MUShoppingCarViewCellDel
                 //"44" is height of headerView
                 if modal!.orderedGoodsModals!.count > 2 {
                     
-                    rowHeight = 2 * 92.0 + 44.0
+                     rowHeight = 80.0 * 2.0 + 44.0 + 2*12.0
                 }else{
                     
-                    rowHeight = CGFloat(modal!.orderedGoodsModals!.count) * 92.0 + 44.0
+                     rowHeight = CGFloat(modal!.orderedGoodsModals!.count) * 12.0 + 44.0 + 80.0 * CGFloat(modal!.orderedGoodsModals!.count)
                 }
                 
             }else{
                 
-                if modal!.orderedGoodsModals!.count > 3 {
+                if modal!.orderedGoodsModals!.count > 2 {
                     
-                    rowHeight = 2 * 92.0 + 44.0
+                    rowHeight = (2+1)*12.0 + 80.0 * 2.0
+                    
                 }else{
                     
                    
                     
-                    rowHeight = CGFloat(modal!.orderedGoodsModals!.count) * 92.0
+                     rowHeight = CGFloat(modal!.orderedGoodsModals!.count + 1) * 12.0 + 80.0 * CGFloat(modal!.orderedGoodsModals!.count)
                 }
                 
                 

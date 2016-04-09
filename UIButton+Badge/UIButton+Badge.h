@@ -32,4 +32,6 @@
 // Badge has a bounce animation when value changes
 @property BOOL shouldAnimateBadge;
 
+-(void)updateBadgeFrame;
+
 @end

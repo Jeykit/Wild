@@ -618,6 +618,7 @@
 				7CB983AA1C7BF9BF00423532 /* MUOrderTableViewController.swift */,
 			);
 			name = MUMeController;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		7CBC8F3B1C8156FA005D6EFB /* fmdb */ = {
@@ -783,10 +784,23 @@
 			path = trench;
 			sourceTree = "<group>";
 		};
+		7CCF75071CB89DED00CA58AD /* others */ = {
+			isa = PBXGroup;
+			children = (
+				7CF16C641C4E485000FCAE46 /* Main.storyboard */,
+				7C87AA291CB4F5AE0096D8E2 /* Launch Screen.storyboard */,
+				7CF16C601C4E485000FCAE46 /* AppDelegate.swift */,
+				7C432CB01C58C2FD00DB9080 /* menuList.plist */,
+				7CF16C671C4E485000FCAE46 /* Assets.xcassets */,
+				7CF16C6C1C4E485000FCAE46 /* Info.plist */,
+				7CB983AC1C7C213E00423532 /* MUMeSettingMenu.plist */,
+			);
+			name = others;
+			sourceTree = "<group>";
+		};
 		7CD54E741C55CACA00FA25BB /* MenuView */ = {
 			isa = PBXGroup;
 			children = (
-				7CB983A91C7BF95A00423532 /* MUMeController */,
 				7CD54E751C55CACA00FA25BB /* Controller */,
 				7CD54E761C55CACA00FA25BB /* Modal */,
 				7CD54E771C55CACA00FA25BB /* View */,
@@ -797,6 +811,7 @@
 		7CD54E751C55CACA00FA25BB /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				7CB983A91C7BF95A00423532 /* MUMeController */,
 				7CFD8C1D1C5724890097E42F /* MUViewController.swift */,
 				7C5842D61C9D788400CFC408 /* MUMenuViewController.swift */,
 				7CDE128F1C57509E00EE0486 /* MUContentViewController.swift */,
@@ -986,14 +1001,8 @@
 				7C0B35241C802EC300E8F319 /* Sqlite */,
 				7CF754451C5DD3F200281665 /* Delegate */,
 				7CD6F54A1C53203D00B34D5D /* Class */,
-				7CF16C601C4E485000FCAE46 /* AppDelegate.swift */,
 				7CC5A5121C87D754003B16F2 /* images */,
-				7CF16C641C4E485000FCAE46 /* Main.storyboard */,
-				7C87AA291CB4F5AE0096D8E2 /* Launch Screen.storyboard */,
-				7C432CB01C58C2FD00DB9080 /* menuList.plist */,
-				7CF16C671C4E485000FCAE46 /* Assets.xcassets */,
-				7CF16C6C1C4E485000FCAE46 /* Info.plist */,
-				7CB983AC1C7C213E00423532 /* MUMeSettingMenu.plist */,
+				7CCF75071CB89DED00CA58AD /* others */,
 			);
 			path = Wild;
 			sourceTree = "<group>";

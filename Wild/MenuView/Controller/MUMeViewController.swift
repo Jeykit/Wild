@@ -149,6 +149,12 @@ class MUMeViewController: UIViewController,MURectFromCellDelegate,UIGestureRecog
         }
         
     }
+    
+//    override func viewDidDisappear(animated: Bool) {
+//        
+//        self.navigationView?.removeFromSuperview()
+//    }
+    
     private func getLocationInfo() {
         
         
@@ -1115,11 +1121,11 @@ class MUMeViewController: UIViewController,MURectFromCellDelegate,UIGestureRecog
                 
                 if modal!.orderedGoodsModals!.count > 2 {
                     
-                    rowHeight = 2 * 92.0 + 44.0
+                    rowHeight = 80.0 * 2.0 + 44.0 + 2*12.0
                     
                 }else{
                     
-                    rowHeight = CGFloat(modal!.orderedGoodsModals!.count) * 92.0 + 44.0
+                    rowHeight = CGFloat(modal!.orderedGoodsModals!.count) * 12.0 + 44.0 + 80.0 * CGFloat(modal!.orderedGoodsModals!.count)
                 }
 
                 
@@ -1128,12 +1134,12 @@ class MUMeViewController: UIViewController,MURectFromCellDelegate,UIGestureRecog
             
                 if modal!.orderedGoodsModals!.count > 2 {
                     
-                    rowHeight = 2 * 104.0
+                    rowHeight = (2+1)*12.0 + 80.0 * 2.0
                     
                 }else{
                     
                     
-                    rowHeight = CGFloat(modal!.orderedGoodsModals!.count) * 104.0
+                   rowHeight = CGFloat(modal!.orderedGoodsModals!.count + 1) * 12.0 + 80.0 * CGFloat(modal!.orderedGoodsModals!.count)
                     
                 }
 

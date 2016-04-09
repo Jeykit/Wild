@@ -446,6 +446,9 @@ class MUContentViewController: UIViewController,UICollectionViewDataSource,UICol
             let shoppingCarNumber = MUButtonBdageTool.getButtonBadgeValues()
             
             shoppingOfButton.badgeValue = "\(shoppingCarNumber)"
+            
+            shoppingOfButton.badgeOriginY = 0
+            
         }
         
         
@@ -584,7 +587,7 @@ class MUContentViewController: UIViewController,UICollectionViewDataSource,UICol
         
         navigationView.addConstraints(Hcons)
         
-        let vcons = NSLayoutConstraint(item: seachView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: navigationView, attribute: NSLayoutAttribute.Height, multiplier: 0, constant: 30)
+        let vcons = NSLayoutConstraint(item: seachView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: navigationView, attribute: NSLayoutAttribute.Height, multiplier: 0, constant: 30.0)
         
         navigationView.addConstraint(vcons)
         

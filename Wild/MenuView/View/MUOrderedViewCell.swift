@@ -259,7 +259,7 @@ class MUOrderedViewCell: UITableViewCell {
         
         var vGoodsViewTotaConstraintlVFL:String = "V:|-0-"
     
-        if total == 1 {
+        if total < 3 && indexPath?.section != 0{
         
             vGoodsViewTotaConstraintlVFL = "V:|-12-"
          }
